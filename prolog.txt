@@ -1,0 +1,412 @@
+
+% Eti kenig 213873904
+% Sapir Fick 32637815
+
+
+%פרולוג חלק 1 
+
+% Family tree facts
+parent(david, solomon).
+parent(david, absalom).
+parent(bathsheba, solomon).
+parent(maacah, absalom).
+parent(solomon, rehoboam).
+parent(naamah, rehoboam).
+parent(absalom, tamar).
+parent(absalom, amnon).
+parent(maacah, tamar).
+parent(maacah, amnon).
+parent(rehoboam, abijah).
+parent(maachah, abijah).
+parent(abijah, asa).
+parent(abijah, jotham).
+parent(asa, jehoshaphat).
+parent(azubah, jehoshaphat).
+
+% Gender facts
+male(david).
+male(solomon).
+male(absalom).
+male(rehoboam).
+male(amnon).
+male(abijah).
+male(asa).
+male(jotham).
+male(jehoshaphat).
+
+female(bathsheba).
+female(maacah).
+female(naamah).
+female(tamar).
+female(azubah).
+female(maachah).
+
+% Marriage facts
+married(david, bathsheba).
+married(bathsheba, david).
+married(solomon, naamah).
+married(naamah, solomon).
+married(rehoboam, maachah).
+married(maachah, rehoboam).
+married(absalom, maacah).
+married(asa, azubah).
+married(azubah, asa).
+
+% father
+father(X,Y) :-
+    parent(X,Y),
+    male(X).
+
+% mother
+mother(X,Y) :-
+    parent(X,Y),
+    female(X).
+
+% sun
+sun(Y,X) :-
+    parent(X,Y),
+    male(X).
+
+% daughter
+daughter(Y,X) :-
+    parent(X,Y),
+    female(X).
+
+% grandfather
+grandfather(X,Y) :-
+    parent(X,Z),
+    parent(Z,Y),
+	male(X).
+
+% grandmother
+grandmother(X,Y) :-
+    parent(X,Z),
+    parent(Z,Y),
+	female(X).
+
+% grandsun
+grandsun(Y,X) :-
+    parent(X,Z),
+    parent(Z,Y),
+	male(X).
+
+% granddaughter
+granddaughter(Y,X) :-
+    parent(X,Z),
+    parent(Z,Y),
+	female(X).
+
+%also half brothers are included as siblings
+sibling(X,Y) :-
+    parent(Z,X),
+    parent(Z,Y),
+    X \= Y.
+
+
+% uncle_no_blood(X, Y) :- X is the husband of Y's aunt (Z's sibling)
+uncle_no_blood(X, Y) :-
+    parent(Z, Y),         % Z is Y's parent
+    sibling(Z, W),      
+    married(W, X),       
+    male(X).             
+
+% Cousin - aunt's son
+cousin_of_aunt(X, Y) :-
+    parent(P1, X),
+    parent(P2, Y),
+    sibling(P1, P2),
+    female(P2),
+    male(Y),
+    X \= Y.
+
+% first cousin
+cousin(X, Y) :-
+    parent(P1, X),
+    parent(P2, Y),
+    sibling(P1, P2),
+    X \= Y.
+
+%  female niece  
+niece(X, Y) :-
+    parent(P, X),
+    sibling(P, Y),
+    female(X).
+
+% second degree cousins
+second_degree_cousins(X, Y) :-
+    parent(P1, X),
+    parent(P2, Y),
+    cousin(P1, P2), % Their parents are first cousins
+    X \= Y.
+
+
+
+
+%פרולוג חלק 1 
+
+% Family tree facts
+parent(david, solomon).
+parent(david, absalom).
+parent(bathsheba, solomon).
+parent(maacah, absalom).
+parent(solomon, rehoboam).
+parent(naamah, rehoboam).
+parent(absalom, tamar).
+parent(absalom, amnon).
+parent(maacah, tamar).
+parent(maacah, amnon).
+parent(rehoboam, abijah).
+parent(maachah, abijah).
+parent(abijah, asa).
+parent(abijah, jotham).
+parent(asa, jehoshaphat).
+parent(azubah, jehoshaphat).
+
+% Gender facts
+male(david).
+male(solomon).
+male(absalom).
+male(rehoboam).
+male(amnon).
+male(abijah).
+male(asa).
+male(jotham).
+male(jehoshaphat).
+
+female(bathsheba).
+female(maacah).
+female(naamah).
+female(tamar).
+female(azubah).
+female(maachah).
+
+% Marriage facts
+married(david, bathsheba).
+married(bathsheba, david).
+married(solomon, naamah).
+married(naamah, solomon).
+married(rehoboam, maachah).
+married(maachah, rehoboam).
+married(absalom, maacah).
+married(asa, azubah).
+married(azubah, asa).
+
+% father
+father(X,Y) :-
+    parent(X,Y),
+    male(X).
+
+% mother
+mother(X,Y) :-
+    parent(X,Y),
+    female(X).
+
+% sun
+sun(Y,X) :-
+    parent(X,Y),
+    male(X).
+
+% daughter
+daughter(Y,X) :-
+    parent(X,Y),
+    female(X).
+
+% grandfather
+grandfather(X,Y) :-
+    parent(X,Z),
+    parent(Z,Y),
+	male(X).
+
+% grandmother
+grandmother(X,Y) :-
+    parent(X,Z),
+    parent(Z,Y),
+	female(X).
+
+% grandsun
+grandsun(Y,X) :-
+    parent(X,Z),
+    parent(Z,Y),
+	male(X).
+
+% granddaughter
+granddaughter(Y,X) :-
+    parent(X,Z),
+    parent(Z,Y),
+	female(X).
+
+%also half brothers are included as siblings
+sibling(X,Y) :-
+    parent(Z,X),
+    parent(Z,Y),
+    X \= Y.
+
+
+% uncle_no_blood(X, Y) :- X is the husband of Y's aunt (Z's sibling)
+uncle_no_blood(X, Y) :-
+    parent(Z, Y),         % Z is Y's parent
+    sibling(Z, W),      
+    married(W, X),       
+    male(X).             
+
+% Cousin - aunt's son
+cousin_of_aunt(X, Y) :-
+    parent(P1, X),
+    parent(P2, Y),
+    sibling(P1, P2),
+    female(P2),
+    male(Y),
+    X \= Y.
+
+% first cousin
+cousin(X, Y) :-
+    parent(P1, X),
+    parent(P2, Y),
+    sibling(P1, P2),
+    X \= Y.
+
+%  female niece  
+niece(X, Y) :-
+    parent(P, X),
+    sibling(P, Y),
+    female(X).
+
+% second degree cousins
+second_degree_cousins(X, Y) :-
+    parent(P1, X),
+    parent(P2, Y),
+    cousin(P1, P2), % Their parents are first cousins
+    X \= Y.
+
+
+
+
+%פרולוג חלק 2 
+
+% 1. Reverse a list
+% Base case: the reverse of an empty list is an empty list.
+reverse([], []).
+
+% Recursive case: reverse the tail of the list and append the head to the reversed tail.
+reverse([H|T], Rev) :-
+    reverse(T, RevT), 
+    append(RevT, [H], Rev).
+
+% 2. Check if an element is a member of a list
+% Base case: an element is a member of the list if it is the head of the list.
+member(X, [X|_]).
+
+% Recursive case: an element is a member of the list if it is a member of the tail.
+member(X, [_|T]) :-
+    member(X, T).
+
+% 3. Check if a list is a palindrome
+% A list is a palindrome if it is the same when reversed.
+palindrome(L) :- 
+    reverse(L, L).
+
+% 4. Check if a list is sorted
+% Base case: an empty list or a single-element list is sorted.
+sorted([]). 
+sorted([_]).
+
+% Recursive case: the list is sorted if the first two elements are in order,
+% and the rest of the list is also sorted.
+sorted([X, Y | Rest]) :-
+    check(X, Y),             
+    sorted([Y | Rest]).    
+
+% Helper rule: check if two elements are in non-decreasing order.
+check(X, Y) :-
+    X =< Y.
+
+% 5. Generate permutations of a list
+% Base case: the permutation of an empty list is an empty list.
+permutation([], []).
+
+% Recursive case: remove an element X from the list and generate permutations of the rest.
+permutation(L, [X | P]) :- 
+    del(X, L, L1),          
+    permutation2(L1, P).    
+
+% Helper rule: delete the first occurrence of an element X from a list.
+del(X, [X | L], L).      
+del(X, [Y | L], [Y | L1]) :- 
+    del(X, L, L1).
+
+
+%פרולוג חלק 3 
+
+%1.
+scum(1, 1).
+
+scum(N, Res) :-
+    N > 1,
+    N1 is N - 1,
+    scum(N1, Res1),
+    Res is Res1 + N.
+
+sumDigits(0, 0).
+
+sumDigits(Num,Sum) :- 
+    Num > 0,
+    D is Num mod 10 ,
+    Num1 is Num // 10,
+    sumDigits(Num1, S),
+    Sum is S + D.
+
+%2.
+
+split1(0,[]).
+
+split1(N,[D|Res]) :-
+    N > 0,
+    D is N mod 10,
+    N1 is N // 10,
+    split1(N1, Res).
+    
+
+split(N, Res) :-
+    split1(N, Rev),
+    reverse(Rev, Res).
+
+
+create([], 0).
+
+create([D|Rest], N) :-
+    create(Rest, N1),  
+    N is N1 * 10 + D.      
+
+reversNum(N, Rev) :-
+    split(N, Lis),
+    create(Lis, Rev).
+
+%3.
+
+intersection([], _, []).
+intersection([H|T], L2, [H|Z]) :-
+    member(H, L2),
+    intersection(T, L2, Z).
+intersection([_|T], L2, Z) :-
+    intersection(T, L2, Z).
+
+
+
+minus([], _, []).
+minus([H|T], L2, [H|Z]) :-
+    \+ member(H, L2),
+    minus(T, L2, Z).
+minus([_|T], L2, Z) :-
+    minus(T, L2, Z).
+
+
+
+
+
+
+
+
+
+
+
+
