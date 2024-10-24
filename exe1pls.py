@@ -1,6 +1,6 @@
 # exe 1
 # Sapir Fick 32637815
-# Eti Kening
+# Eti Kening 213873904
 
 # 1a
 def get_penta_num(n):
