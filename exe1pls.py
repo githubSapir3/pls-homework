@@ -1,6 +1,10 @@
-# exe 1
-# Sapir Fick 32637815
-# Eti Kening 213873904
+"""
+Structure of software languages Exercise 1
+
+Authors:
+Eti kenig 213873904
+Sapir Fick 32637815
+"""
 
 # 1a
 def get_penta_num(n):
