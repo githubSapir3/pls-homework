@@ -52,9 +52,20 @@ print(sum_array(recursive_result))
 print(tail_sum_array(recursive_result))
 
 # -----------------question 3-------------------
+def lcm_recursive(a, b, multiple=0):
+    # מוצאים את המספר הגדול והקטן
+    bigger = max(a, b)
+    smaller = min(a, b)
+    if multiple is 0:
+        multiple = bigger
+    if multiple % smaller == 0:
+        return multiple
+    return lcm_recursive(a, b, multiple + bigger)
 
 
 
+print(lcm_recursive(12, 18)) 
+print(lcm_recursive(10, 15))
 
 # -----------------question 4-------------------
 def to_digits(n):
@@ -85,6 +96,8 @@ print(recursive_tail_is_palindrome(to_digits(12321)))
 
 
 # -----------------question 5-------------------
+
+
 
 
 """---------------Lazy Evaluations and Generators-----------------"""
