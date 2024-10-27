@@ -195,3 +195,22 @@ for x in range(10):
 
 
 # -----------------question 3-------------------
+from math import factorial
+
+
+def taylor(x):
+    n= 0
+    sums=0
+    while True: 
+        sums += ((x ** n) / factorial(n)) 
+        yield sums
+        n +=1
+        
+        
+    
+
+gen = taylor(2)  # For example, calculating e^2
+
+ 
+for _ in range(10):
+    print(next(gen))
