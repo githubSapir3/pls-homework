@@ -69,7 +69,13 @@ def inverse(x):
 
 def apply_functions(n, functions):
     return dict(map(lambda func: (func.__name__, list(map(func, n))), functions))
-
+    
+def c(funcs, nums):
+    return tuple(zip(funcs, map(lambda f: tuple(map(f, nums)), funcs)))
+    
+def c3(funcs, nums):
+    return tuple(zip(map(lambda f: f.__name__, funcs), map(lambda f: tuple(map(f, nums)), funcs)))
+    
 
 if __name__ == '__main__':
     # 1
