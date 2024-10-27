@@ -96,6 +96,24 @@ print(recursive_tail_is_palindrome(to_digits(12321)))
 
 
 # -----------------question 5-------------------
+def sortedzip(*lists):
+    # Base case: if there is only one element left, return it as a list
+    if len(lists[0]) == 1:
+        return [tuple(l[0] for l in lists)]
+    
+    # Find the minimum element (according to the first list) and its index
+    min_index = min(range(len(lists[0])), key=lists[0].__getitem__)
+    
+    # Extract the minimum element tuple
+    min_tuple = tuple(l[min_index] for l in lists)
+    
+    # Recursively call sortedzip on lists without the minimum element
+    remaining_lists = [l[:min_index] + l[min_index+1:] for l in lists]
+    
+    return [min_tuple] + sortedzip(*remaining_lists)
+
+# Test example
+print(sortedzip([3, 1, 2], [5, 6, 4], ['a', 'b', 'c']))
 
 
 
